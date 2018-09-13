@@ -17,21 +17,6 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-/*app.get('/posts', (req, res) => {
-    res.send(
-      [
-        {
-          title: "Hello World!",
-          description: "Hi there! How are you?"
-        },
-        {
-          title: "MEVN",
-          description: "Learning Mongoose, express, vue and nodejs"
-        }
-    ]
-    )
-  })*/
-
   // Fetch all posts
 app.get('/posts', (req, res) => {
   Post.find({}, 'title description', function (error, posts) {
@@ -43,7 +28,6 @@ app.get('/posts', (req, res) => {
 })
 
   app.post('/posts', (req,res) => {
-    var db = req.db;
     var title = req.body.title;
     var description = req.body.description;
     var new_post = new Post({
@@ -64,7 +48,7 @@ app.get('/posts', (req, res) => {
 
   // Fetch single post
 app.get('/post/:id', (req, res) => {
-  var db = req.db;
+  
   Post.findById(req.params.id, 'title description', function (error, post) {
     if (error) { console.error(error); }
     res.send(post)
@@ -73,7 +57,6 @@ app.get('/post/:id', (req, res) => {
 
 // Update a post
 app.put('/posts/:id', (req, res) => {
-  var db = req.db;
   Post.findById(req.params.id, 'title description', function (error, post) {
     if (error) { console.error(error); }
 
@@ -92,7 +75,7 @@ app.put('/posts/:id', (req, res) => {
 
 // Delete a post
 app.delete('/posts/:id', (req, res) => {
-  var db = req.db;
+  
   Post.remove({
     _id: req.params.id
   }, function(err, post){

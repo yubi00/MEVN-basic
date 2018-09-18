@@ -3,9 +3,14 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
-var Post = require("../models/post");
+var path = require('path');
+var serveStatic = require('serve-static');
+app.use(serveStatic(__dirname + "/dist"));
+var Post = require("./models/post");
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/posts');
+var mongodb =  'mongodb://yubi:12tomhanks@ds255332.mlab.com:55332/posts'; //mongodob url using mLab
+//mongoose.connect('mongodb://localhost:27017/posts'); //for running locally
+mongoose.connect(mongodb);
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", function(callback){

@@ -9,6 +9,7 @@ app.use(serveStatic(__dirname + "/dist"));
 var Post = require("./models/post");
 var mongoose = require('mongoose');
 var mongodb =  'mongodb://yubi:12tomhanks@ds255332.mlab.com:55332/posts'; //mongodob url using mLab
+console.log("Test: "+mongodb);
 //mongoose.connect('mongodb://localhost:27017/posts'); //for running locally
 mongoose.connect(mongodb);
 var db = mongoose.connection;
